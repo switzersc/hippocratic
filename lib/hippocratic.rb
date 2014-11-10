@@ -6,6 +6,8 @@ module Hippocratic
 
   class DrugReference
 
+    attr_accessor :description, :dosage, :other_names, :side_effects, :storage
+
     REFERENCE_HASH = {
         description: "What is",
         dosage: "What is the usual dosage",
@@ -19,31 +21,14 @@ module Hippocratic
       @drug_name = drug_name
       @document = Nokogiri::HTML(open(Hippocratic.base_uri + @drug_name))
       @article = @document.css("article")
+      for key in REFERENCE_HASH.keys do
+        send "#{key}=", find_node(key)
+      end
     end
 
     def valid?
       header = @document.css("h1").first
       header.text == @drug_name
-    end
-
-    def description
-      @description ||= find_node(:description)
-    end
-
-    def dosage
-      @dosage ||= find_node(:dosage)
-    end
-
-    def other_names
-      @other_names ||= find_node(:other_names)
-    end
-
-    def side_effects
-      @side_effects ||= find_node(:side_effects)
-    end
-
-    def storage
-      @storage ||= find_node(:storage)
     end
 
     private

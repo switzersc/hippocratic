@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Hippocratic do
 
+  # TODO test for drug names with spaces, periods, dashes, etc
   describe Hippocratic::DrugReference do
     context "Sudafed" do
       subject { Hippocratic::DrugReference.new("Sudafed") }

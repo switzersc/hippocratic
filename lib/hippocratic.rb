@@ -21,7 +21,8 @@ module Hippocratic
     # TODO rescue from 404 / include as part of validation
     def initialize(drug_name)
       @drug_name = drug_name
-      @document = Nokogiri::HTML(open(Hippocratic.base_uri + @drug_name))
+      modified_name = format_name
+      @document = Nokogiri::HTML(open(Hippocratic.base_uri + modified_name))
       @article = @document.css("article")
       for key in REFERENCE_HASH.keys do
         send "#{key}=", find_node(key)
@@ -40,6 +41,12 @@ module Hippocratic
       header_node = @article.search("[text()*='#{term}']").first
       return nil unless header_node
       header_node.parent.text
+    end
+
+    def format_name
+      name = @drug_name.gsub(" ", "-")
+      name = name.gsub("'", "")
+      name.gsub("/", "-")
     end
 
   end

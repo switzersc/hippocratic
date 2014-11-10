@@ -25,7 +25,8 @@ module Hippocratic
       header = @document.css("h1").first
       header.text == @drug_name
     end
-
+    
+    # todo dry all these  into simple attribute assignment
     def description
       @description ||= find_node(:description)
     end
@@ -58,7 +59,7 @@ module Hippocratic
   end
 
   private
-
+  # not actually the pdr but same publishers. need To index pdr drugs before we can use that
   def self.base_uri
     "http://www.pdrhealth.com/drugs/"
   end

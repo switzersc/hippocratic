@@ -1,6 +1,6 @@
 # Hippocratic
 
-Hippocratic is a simple wrapper for the Physicans Desk Reference. Sicne the PDR doesn't have an API and I needed a simple way
+Hippocratic is a simple wrapper for the Physicans Desk Reference. Since the PDR doesn't have an API and I needed a simple way
 to get information about drugs, I wrote Hippocratic, which basically uses Nokogiri to search and parse pdrhealth.com. It essentially creates
 an object based on the PDR page for the drug you specify, with basic methods available to get the info you need.
 

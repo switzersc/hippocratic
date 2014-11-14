@@ -44,15 +44,16 @@ module Hippocratic
     end
 
     def format_name
-      name = @drug_name.gsub(" ", "-")
-      name = name.gsub("'", "")
-      name.gsub("/", "-")
+      name = @drug_name.tr(" ", "-")
+      name = name.tr("'", "")
+      name.tr("/", "-")
     end
 
   end
 
   private
-  # not actually the pdr but same publishers. need To index pdr drugs before we can use that
+  
+  # not actually the pdr (pdr.net) but same publishers. need to index pdr drug ids before we can use that
   def self.base_uri
     "http://www.pdrhealth.com/drugs/"
   end
